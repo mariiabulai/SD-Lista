@@ -291,7 +291,7 @@ int main() {
                 if (dwukierunkowa.getRozmiar() > 0) {
                     dwukier_usunZKoncu_suma += measure_time([&]() {
                         dwukierunkowa.usunZKoncu();
-                        });
+                    });
                 }
                 int search_wartosc = rand() % 10000;
                 dwukier_wyszukiwanie_suma += measure_time([&]() {
