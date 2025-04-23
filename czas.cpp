@@ -21,8 +21,7 @@ double measure_time(Function func) {
 
 int main() {
     //Tablice rozmiarów danych testowych i nasion losowych
-    const int SIZES[] = { 50000, 100000, 150000, 200000, 250000, 300000, 350000, 400000, 450000, 500000 };
-    const int SIZES1[] = { 10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000 };
+    const int SIZES[] = { 10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000 };
     const int TESTS = 100;
     const int SEEDS[] = { 250, 300, 350, 400, 450, 500, 550, 600, 650, 700 };
 
@@ -37,7 +36,7 @@ int main() {
     }
 
     //Tablica dynamiczna
-    for (int size : SIZES1) {
+    for (int size : SIZES) {
         //Wypisanie aktualnego rozmiaru
         cout << "\nTablica dynamiczna: Rozmiar: " << size << endl;
         tablicaDynamicznaPlik << "\nTablica dynamiczna: Rozmiar: " << size << endl;
@@ -138,7 +137,7 @@ int main() {
 
 
     //Lista jednokierunkowa
-    for (int size : SIZES1) {
+    for (int size : SIZES) {
         //Wypisanie aktualnego rozmiaru
         cout << "\nLista jednokierunkowa: Rozmiar: " << size << endl;
         listaJednokierunkowaPlik << "\nLista jednokierunkowa: Rozmiar: " << size << endl;
@@ -232,7 +231,7 @@ int main() {
     }
 
     //Lista dwukierunkowa
-    for (int size : SIZES1) {
+    for (int size : SIZES) {
         //Wypisanie aktualnego rozmiaru
         cout << "\nLista dwukierunkowa: Rozmiar: " << size << endl;
         listaDwukierunkowaPlik << "\nLista dwukierunkowa: Rozmiar: " << size << endl;
@@ -291,7 +290,7 @@ int main() {
                 if (dwukierunkowa.getRozmiar() > 0) {
                     dwukier_usunZKoncu_suma += measure_time([&]() {
                         dwukierunkowa.usunZKoncu();
-                    });
+                        });
                 }
                 int search_wartosc = rand() % 10000;
                 dwukier_wyszukiwanie_suma += measure_time([&]() {
