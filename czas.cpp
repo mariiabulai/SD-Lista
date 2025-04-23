@@ -21,7 +21,7 @@ long long measure_time(Function func) {
 
 int main() {
     //Tablice rozmiarów danych testowych i nasion losowych
-    const int SIZES[] = { 10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000 };
+    const int rozmiarS[] = { 10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000 };
     const int TESTS = 100;
     const int SEEDS[] = { 250, 300, 350, 400, 450, 500, 550, 600, 650, 700 };
 
@@ -36,10 +36,10 @@ int main() {
     }
 
     //Tablica dynamiczna
-    for (int size : SIZES) {
+    for (int rozmiar : rozmiarS) {
         //Wypisanie aktualnego rozmiaru
-        cout << "\nTablica dynamiczna: Rozmiar: " << size << endl;
-        tablicaDynamicznaPlik << "\nTablica dynamiczna: Rozmiar: " << size << endl;
+        cout << "\nTablica dynamiczna: Rozmiar: " << rozmiar << endl;
+        tablicaDynamicznaPlik << "\nTablica dynamiczna: Rozmiar: " << rozmiar << endl;
         int seedCount = 0;
         //Sumy czasów operacji (do obliczenia średniej)
         double tablica_dodajNaPoczatku = 0.0;
@@ -64,7 +64,7 @@ int main() {
             double tablica_wyszukiwanie_suma = 0.0;
 
             for (int i = 0; i < TESTS; i++) {
-                tablica.fillRandom(size, seed);
+                tablica.fillRandom(rozmiar, seed);
                 //Pomiar czasu dla różnych operacji
                 int wartosc = rand() % 10000;
                 tablica_dodajNaPoczatku_suma += measure_time([&]() {
@@ -75,24 +75,24 @@ int main() {
                     tablica.dodajNaKoniec(wartosc);
                     });
                 wartosc = rand() % 10000;
-                int index = (tablica.getRozmiar() > 0) ? (rand() % tablica.getRozmiar()) : 0;
+                int indeks = (tablica.getRozmiar() > 0) ? (rand() % tablica.getRozmiar()) : 0;
                 tablica_dodaj_suma += measure_time([&]() {
-                    tablica.dodaj(wartosc, index);
+                    tablica.dodaj(wartosc, indeks);
                     });
-                tablica.fillRandom(size, seed);
+                tablica.fillRandom(rozmiar, seed);
                 if (tablica.getRozmiar() > 0) {
-                    int remove_index = rand() % tablica.getRozmiar();
+                    int remove_indeks = rand() % tablica.getRozmiar();
                     tablica_usun_suma += measure_time([&]() {
-                        tablica.usun(remove_index);
+                        tablica.usun(remove_indeks);
                         });
                 }
-                tablica.fillRandom(size, seed);
+                tablica.fillRandom(rozmiar, seed);
                 if (tablica.getRozmiar() > 0) {
                     tablica_usunZPoczatku_suma += measure_time([&]() {
                         tablica.usunZPoczatku();
                         });
                 }
-                tablica.fillRandom(size, seed);
+                tablica.fillRandom(rozmiar, seed);
                 if (tablica.getRozmiar() > 0) {
                     tablica_usunZKoncu_suma += measure_time([&]() {
                         tablica.usunZKoncu();
@@ -116,8 +116,8 @@ int main() {
         }
 
         //Wypisanie średnich wyników
-        cout << "\nWyniki tablica dynamiczna: Rozmiar: " << size << " ( " << seedCount << " seedow):\n";
-        tablicaDynamicznaPlik << "\nWyniki tablica dynamiczna: Rozmiar: " << size << " ( " << seedCount << " seedow):\n";
+        cout << "\nWyniki tablica dynamiczna: Rozmiar: " << rozmiar << " ( " << seedCount << " seedow):\n";
+        tablicaDynamicznaPlik << "\nWyniki tablica dynamiczna: Rozmiar: " << rozmiar << " ( " << seedCount << " seedow):\n";
         cout << "Dodanie na poczatek: " << (tablica_dodajNaPoczatku / seedCount) << " ns\n" <<
             "Dodanie na koniec: " << (tablica_dodajNaKoncu / seedCount) << " ns\n" <<
             "Dodanie z indeksem: " << (tablica_dodaj / seedCount) << " ns\n" <<
@@ -137,10 +137,10 @@ int main() {
 
 
     //Lista jednokierunkowa
-    for (int size : SIZES) {
+    for (int rozmiar : rozmiarS) {
         //Wypisanie aktualnego rozmiaru
-        cout << "\nLista jednokierunkowa: Rozmiar: " << size << endl;
-        listaJednokierunkowaPlik << "\nLista jednokierunkowa: Rozmiar: " << size << endl;
+        cout << "\nLista jednokierunkowa: Rozmiar: " << rozmiar << endl;
+        listaJednokierunkowaPlik << "\nLista jednokierunkowa: Rozmiar: " << rozmiar << endl;
 
         //Sumy czasów operacji (do obliczenia średniej)
         double jednokier_dodajNaPoczatku = 0.0;
@@ -168,7 +168,7 @@ int main() {
 
             //Pomiar czasu dla różnych operacji
             for (int i = 0; i < TESTS; i++) {
-                jednokierunkowa.fillRandom(size, seed);
+                jednokierunkowa.fillRandom(rozmiar, seed);
                 int wartosc = rand() % 10000;
                 jednokier_dodajNaPoczatku_suma += measure_time([&]() {
                     jednokierunkowa.dodajNaPoczatek(wartosc);
@@ -181,15 +181,15 @@ int main() {
                 jednokier_dodaj_suma += measure_time([&]() {
                     jednokierunkowa.dodaj(wartosc, rand() % jednokierunkowa.getRozmiar());
                     });
-                jednokierunkowa.fillRandom(size, seed);
+                jednokierunkowa.fillRandom(rozmiar, seed);
                 jednokier_usun_suma += measure_time([&]() {
                     jednokierunkowa.usun(rand() % jednokierunkowa.getRozmiar());
                     });
-                jednokierunkowa.fillRandom(size, seed);
+                jednokierunkowa.fillRandom(rozmiar, seed);
                 jednokier_usunZPoczatku_suma += measure_time([&]() {
                     jednokierunkowa.usunZPoczatku();
                     });
-                jednokierunkowa.fillRandom(size, seed);
+                jednokierunkowa.fillRandom(rozmiar, seed);
                 jednokier_usunZKoncu_suma += measure_time([&]() {
                     jednokierunkowa.usunZKoncu();
                     });
@@ -211,8 +211,8 @@ int main() {
 
 
         //Wypisanie średnich wyników
-        cout << "\nWyniki lista jednokierunkowa: Rozmiar: " << size << " ( " << seedCount << " seedow):\n";
-        listaJednokierunkowaPlik << "\nWyniki lista jednokierunkowa: Rozmiar: " << size << " ( " << seedCount << " seedow):\n";
+        cout << "\nWyniki lista jednokierunkowa: Rozmiar: " << rozmiar << " ( " << seedCount << " seedow):\n";
+        listaJednokierunkowaPlik << "\nWyniki lista jednokierunkowa: Rozmiar: " << rozmiar << " ( " << seedCount << " seedow):\n";
         cout << "Dodanie na poczatek: " << (jednokier_dodajNaPoczatku / seedCount) << " ns\n" <<
             "Dodanie na koniec: " << (jednokier_dodajNaKoniec / seedCount) << " ns\n" <<
             "Dodanie z indeksem: " << (jednokier_dodaj / seedCount) << " ns\n" <<
@@ -231,10 +231,10 @@ int main() {
     }
 
     //Lista dwukierunkowa
-    for (int size : SIZES) {
+    for (int rozmiar : rozmiarS) {
         //Wypisanie aktualnego rozmiaru
-        cout << "\nLista dwukierunkowa: Rozmiar: " << size << endl;
-        listaDwukierunkowaPlik << "\nLista dwukierunkowa: Rozmiar: " << size << endl;
+        cout << "\nLista dwukierunkowa: Rozmiar: " << rozmiar << endl;
+        listaDwukierunkowaPlik << "\nLista dwukierunkowa: Rozmiar: " << rozmiar << endl;
 
         //Sumy czasów operacji (do obliczenia średniej)
         double dwukier_dodajNaPoczatku = 0.0;
@@ -262,7 +262,7 @@ int main() {
 
             //Pomiar czasu dla różnych operacji
             for (int i = 0; i < TESTS; i++) {
-                dwukierunkowa.fillRandom(size, seed);
+                dwukierunkowa.fillRandom(rozmiar, seed);
                 int wartosc = rand() % 10000;
                 dwukier_dodajNaPoczatku_suma += measure_time([&]() {
                     dwukierunkowa.dodajNaPoczatek(wartosc);
@@ -276,17 +276,17 @@ int main() {
                     dwukierunkowa.dodaj(wartosc, rand() % dwukierunkowa.getRozmiar());
                     });
                 dwukierunkowa.clear();
-                dwukierunkowa.fillRandom(size, seed);
+                dwukierunkowa.fillRandom(rozmiar, seed);
                 dwukier_usun_suma += measure_time([&]() {
                     dwukierunkowa.usun(rand() % dwukierunkowa.getRozmiar());
                     });
                 dwukierunkowa.clear();
-                dwukierunkowa.fillRandom(size, seed);
+                dwukierunkowa.fillRandom(rozmiar, seed);
                 dwukier_usunZPoczatku_suma += measure_time([&]() {
                     dwukierunkowa.usunZPoczatku();
                     });
                 dwukierunkowa.clear();
-                dwukierunkowa.fillRandom(size, seed);
+                dwukierunkowa.fillRandom(rozmiar, seed);
                 if (dwukierunkowa.getRozmiar() > 0) {
                     dwukier_usunZKoncu_suma += measure_time([&]() {
                         dwukierunkowa.usunZKoncu();
@@ -310,8 +310,8 @@ int main() {
         }
 
         //Wypisanie średnich wyników
-        cout << "\nWyniki lista dwukierunkowa: Rozmiar: " << size << " ( " << seedCount << " seedow):\n";
-        listaDwukierunkowaPlik << "\nWyniki lista dwukierunkowa: Rozmiar: " << size << " ( " << seedCount << " seedow):\n";
+        cout << "\nWyniki lista dwukierunkowa: Rozmiar: " << rozmiar << " ( " << seedCount << " seedow):\n";
+        listaDwukierunkowaPlik << "\nWyniki lista dwukierunkowa: Rozmiar: " << rozmiar << " ( " << seedCount << " seedow):\n";
         cout << "Dodanie na poczatek: " << (dwukier_dodajNaPoczatku / seedCount) << " ns\n" <<
             "Dodanie na koniec: " << (dwukier_dodajNaKoniec / seedCount) << " ns\n" <<
             "Dodanie z indeksem: " << (dwukier_dodaj / seedCount) << " ns\n" << \
