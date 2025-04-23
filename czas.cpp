@@ -11,12 +11,12 @@ using namespace std::chrono;
 
 //Szablon funkcji mierzacy czas wykonania dowolnej funkcji
 template<typename Function>
-double measure_time(Function func) {
+long long measure_time(Function func) {
     auto start = high_resolution_clock::now();
     func();
     auto end = high_resolution_clock::now();
-    duration<double> elapsed = end - start;
-    return elapsed.count();
+    nanoseconds elapsed = duration_cast<nanoseconds>(end - start);
+    return elapsed.count(); // Zwraca czas w nanosekundach
 }
 
 int main() {
@@ -118,21 +118,21 @@ int main() {
         //Wypisanie średnich wyników
         cout << "\nWyniki tablica dynamiczna: Rozmiar: " << size << " ( " << seedCount << " seedow):\n";
         tablicaDynamicznaPlik << "\nWyniki tablica dynamiczna: Rozmiar: " << size << " ( " << seedCount << " seedow):\n";
-        cout << "Dodanie na poczatek: " << (tablica_dodajNaPoczatku / seedCount) << " s\n" <<
-            "Dodanie na koniec: " << (tablica_dodajNaKoncu / seedCount) << " s\n" <<
-            "Dodanie z indeksem: " << (tablica_dodaj / seedCount) << " s\n" <<
-            "Usuniecie z poczatku: " << (tablica_usunZPoczatku / seedCount) << " s\n" <<
-            "Usuniecie z konca: " << (tablica_usunZKoncu / seedCount) << " s\n" <<
-            "Usuniecie z indeksem: " << (tablica_usun / seedCount) << " s\n" <<
-            "Wyszukiwanie: " << (tablica_wyszukiwanie / seedCount) << " s\n";
+        cout << "Dodanie na poczatek: " << (tablica_dodajNaPoczatku / seedCount) << " ns\n" <<
+            "Dodanie na koniec: " << (tablica_dodajNaKoncu / seedCount) << " ns\n" <<
+            "Dodanie z indeksem: " << (tablica_dodaj / seedCount) << " ns\n" <<
+            "Usuniecie z poczatku: " << (tablica_usunZPoczatku / seedCount) << " ns\n" <<
+            "Usuniecie z konca: " << (tablica_usunZKoncu / seedCount) << " ns\n" <<
+            "Usuniecie z indeksem: " << (tablica_usun / seedCount) << " ns\n" <<
+            "Wyszukiwanie: " << (tablica_wyszukiwanie / seedCount) << " ns\n";
 
-        tablicaDynamicznaPlik << "Dodanie na poczatek: " << (tablica_dodajNaPoczatku / seedCount) << " s\n" <<
-            "Dodanie na koniec: " << (tablica_dodajNaKoncu / seedCount) << " s\n" <<
-            "Dodanie z indeksem: " << (tablica_dodaj / seedCount) << " s\n" <<
-            "Usuniecie z poczatku: " << (tablica_usunZPoczatku / seedCount) << " s\n" <<
-            "Usuniecie z konca: " << (tablica_usunZKoncu / seedCount) << " s\n" <<
-            "Usuniecie z indeksem: " << (tablica_usun / seedCount) << " s\n" <<
-            "Wyszukiwanie: " << (tablica_wyszukiwanie / seedCount) << " s\n";
+        tablicaDynamicznaPlik << "Dodanie na poczatek: " << (tablica_dodajNaPoczatku / seedCount) << " ns\n" <<
+            "Dodanie na koniec: " << (tablica_dodajNaKoncu / seedCount) << " ns\n" <<
+            "Dodanie z indeksem: " << (tablica_dodaj / seedCount) << " ns\n" <<
+            "Usuniecie z poczatku: " << (tablica_usunZPoczatku / seedCount) << " ns\n" <<
+            "Usuniecie z konca: " << (tablica_usunZKoncu / seedCount) << " ns\n" <<
+            "Usuniecie z indeksem: " << (tablica_usun / seedCount) << " ns\n" <<
+            "Wyszukiwanie: " << (tablica_wyszukiwanie / seedCount) << " ns\n";
     }
 
 
@@ -213,21 +213,21 @@ int main() {
         //Wypisanie średnich wyników
         cout << "\nWyniki lista jednokierunkowa: Rozmiar: " << size << " ( " << seedCount << " seedow):\n";
         listaJednokierunkowaPlik << "\nWyniki lista jednokierunkowa: Rozmiar: " << size << " ( " << seedCount << " seedow):\n";
-        cout << "Dodanie na poczatek: " << (jednokier_dodajNaPoczatku / seedCount) << " s\n" <<
-            "Dodanie na koniec: " << (jednokier_dodajNaKoniec / seedCount) << " s\n" <<
-            "Dodanie z indeksem: " << (jednokier_dodaj / seedCount) << " s\n" <<
-            "Usuniecie z poczatku: " << (jednokier_usunZPoczatku / seedCount) << " s\n" <<
-            "Usuniecie z konca: " << (jednokier_usunZKoncu / seedCount) << " s\n" <<
-            "Usuniecie z indeksem: " << (jednokier_usun / seedCount) << " s\n" <<
-            "Wyszukiwanie: " << (jednokier_wyszukiwanie / seedCount) << " s\n";
+        cout << "Dodanie na poczatek: " << (jednokier_dodajNaPoczatku / seedCount) << " ns\n" <<
+            "Dodanie na koniec: " << (jednokier_dodajNaKoniec / seedCount) << " ns\n" <<
+            "Dodanie z indeksem: " << (jednokier_dodaj / seedCount) << " ns\n" <<
+            "Usuniecie z poczatku: " << (jednokier_usunZPoczatku / seedCount) << " ns\n" <<
+            "Usuniecie z konca: " << (jednokier_usunZKoncu / seedCount) << " ns\n" <<
+            "Usuniecie z indeksem: " << (jednokier_usun / seedCount) << " ns\n" <<
+            "Wyszukiwanie: " << (jednokier_wyszukiwanie / seedCount) << " ns\n";
 
-        listaJednokierunkowaPlik << "Dodanie na poczatek: " << (jednokier_dodajNaPoczatku / seedCount) << " s\n" <<
-            "Dodanie na koniec: " << (jednokier_dodajNaKoniec / seedCount) << " s\n" <<
-            "Dodanie z indeksem: " << (jednokier_dodaj / seedCount) << " s\n" <<
-            "Usuniecie z poczatku: " << (jednokier_usunZPoczatku / seedCount) << " s\n" <<
-            "Usuniecie z konca: " << (jednokier_usunZKoncu / seedCount) << " s\n" <<
-            "Usuniecie z indeksem: " << (jednokier_usun / seedCount) << " s\n" <<
-            "Wyszukiwanie: " << (jednokier_wyszukiwanie / seedCount) << " s\n";
+        listaJednokierunkowaPlik << "Dodanie na poczatek: " << (jednokier_dodajNaPoczatku / seedCount) << " ns\n" <<
+            "Dodanie na koniec: " << (jednokier_dodajNaKoniec / seedCount) << " ns\n" <<
+            "Dodanie z indeksem: " << (jednokier_dodaj / seedCount) << " ns\n" <<
+            "Usuniecie z poczatku: " << (jednokier_usunZPoczatku / seedCount) << " ns\n" <<
+            "Usuniecie z konca: " << (jednokier_usunZKoncu / seedCount) << " ns\n" <<
+            "Usuniecie z indeksem: " << (jednokier_usun / seedCount) << " ns\n" <<
+            "Wyszukiwanie: " << (jednokier_wyszukiwanie / seedCount) << " ns\n";
     }
 
     //Lista dwukierunkowa
@@ -312,21 +312,21 @@ int main() {
         //Wypisanie średnich wyników
         cout << "\nWyniki lista dwukierunkowa: Rozmiar: " << size << " ( " << seedCount << " seedow):\n";
         listaDwukierunkowaPlik << "\nWyniki lista dwukierunkowa: Rozmiar: " << size << " ( " << seedCount << " seedow):\n";
-        cout << "Dodanie na poczatek: " << (dwukier_dodajNaPoczatku / seedCount) << " s\n" <<
-            "Dodanie na koniec: " << (dwukier_dodajNaKoniec / seedCount) << " s\n" <<
-            "Dodanie z indeksem: " << (dwukier_dodaj / seedCount) << " s\n" << \
-            "Usuniecie z poczatku: " << (dwukier_usunZPoczatku / seedCount) << " s\n" <<
-            "Usuniecie z konca: " << (dwukier_usunZKoncu / seedCount) << " s\n" <<
-            "Usuniecie z indeksem: " << (dwukier_usun / seedCount) << " s\n" <<
-            "Wyszukiwanie: " << (dwukier_wyszukiwanie / seedCount) << " s\n";
+        cout << "Dodanie na poczatek: " << (dwukier_dodajNaPoczatku / seedCount) << " ns\n" <<
+            "Dodanie na koniec: " << (dwukier_dodajNaKoniec / seedCount) << " ns\n" <<
+            "Dodanie z indeksem: " << (dwukier_dodaj / seedCount) << " ns\n" << \
+            "Usuniecie z poczatku: " << (dwukier_usunZPoczatku / seedCount) << " ns\n" <<
+            "Usuniecie z konca: " << (dwukier_usunZKoncu / seedCount) << " ns\n" <<
+            "Usuniecie z indeksem: " << (dwukier_usun / seedCount) << " ns\n" <<
+            "Wyszukiwanie: " << (dwukier_wyszukiwanie / seedCount) << " ns\n";
 
-        listaDwukierunkowaPlik << "Dodanie na poczatek: " << (dwukier_dodajNaPoczatku / seedCount) << " s\n" <<
-            "Dodanie na koniec: " << (dwukier_dodajNaKoniec / seedCount) << " s\n" <<
-            "Dodanie z indeksem: " << (dwukier_dodaj / seedCount) << " s\n" <<
-            "Usuniecie z poczatku: " << (dwukier_usunZPoczatku / seedCount) << " s\n" <<
-            "Usuniecie z konca: " << (dwukier_usunZKoncu / seedCount) << " s\n" <<
-            "Usuniecie z indeksem: " << (dwukier_usun / seedCount) << " s\n" <<
-            "Wyszukiwanie: " << (dwukier_wyszukiwanie / seedCount) << " s\n";
+        listaDwukierunkowaPlik << "Dodanie na poczatek: " << (dwukier_dodajNaPoczatku / seedCount) << " ns\n" <<
+            "Dodanie na koniec: " << (dwukier_dodajNaKoniec / seedCount) << " ns\n" <<
+            "Dodanie z indeksem: " << (dwukier_dodaj / seedCount) << " ns\n" <<
+            "Usuniecie z poczatku: " << (dwukier_usunZPoczatku / seedCount) << " ns\n" <<
+            "Usuniecie z konca: " << (dwukier_usunZKoncu / seedCount) << " ns\n" <<
+            "Usuniecie z indeksem: " << (dwukier_usun / seedCount) << " ns\n" <<
+            "Wyszukiwanie: " << (dwukier_wyszukiwanie / seedCount) << " ns\n";
     }
 
     tablicaDynamicznaPlik.close();
